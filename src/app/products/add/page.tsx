@@ -1,13 +1,24 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { useDispatch } from 'react-redux';
 // Update the import path below to the correct relative path if your store file is located elsewhere
 import { AppDispatch } from '../../../store/store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { addProduct, Product } from '../../../store/productsSlice';
+import { setUser } from '../../../store/userSlice';
 
 export default function Example() {
+  const { data: session } = useSession();
   const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (session?.user) {
+      dispatch(
+        setUser({ name: session.user.name!, email: session.user.email! })
+      );
+    }
+  }, [session]);
 
   const [formData, setFormData] = useState<Omit<Product, 'id'>>({
     name: '',
@@ -62,6 +73,7 @@ export default function Example() {
               <h2 className="text-base/7 font-semibold text-gray-900">
                 Personal Information
               </h2>
+              <p className="mt-4">Selamat datang, {session?.user?.name}</p>
               <p className="mt-1 text-sm/6 text-gray-600">
                 Use a permanent address where you can receive mail.
               </p>

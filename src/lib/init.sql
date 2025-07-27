@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS products (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  price INTEGER NOT NULL
+);
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name TEXT,
+  email TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
