@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import './globals.css';
 import Link from 'next/link';
+import { Providers } from './providers';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -55,7 +56,9 @@ export default function RootLayout({ children }) {
             </div>
           </nav>
         </header>
-        <main style={{ padding: '1rem' }}>{children}</main>
+        <main style={{ padding: '1rem' }}>
+          <Providers>{children}</Providers>
+        </main>
       </body>
     </html>
   );

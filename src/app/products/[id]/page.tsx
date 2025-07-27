@@ -1,19 +1,17 @@
+'use client';
+
 interface Props {
   params: {
     id: string;
   };
 }
 
-import { products } from '../../../utils/data';
-
-function findProductById(id: number) {
-  return products.find((product) => product.id === id);
-}
+import { useSelector } from 'react-redux';
+import { selectProductById } from '../../../store/productsSlice';
 
 export default function ProductPage({ params }: Props) {
   const id = parseInt(params.id);
-  const product = findProductById(id);
-  console.log(product);
+  const product = useSelector((state) => selectProductById(state, id));
 
   return (
     <>
